@@ -12,7 +12,18 @@ export const createMovie = async (movieData) => {
 
 export const listMovies = async () => {
     const movies = await Movie.findAll({
-      attributes: ['title', 'year', 'genre', 'image'],
+      attributes: {
+        exclude: ['id'],
+      },
     });
     return movies;
+};
+
+export const getMovieById = async (id) => {
+    const movie = await Movie.findByPk(id, {
+        attributes: {
+            exclude: ['id'],
+        },
+    });
+    return movie;
 };
