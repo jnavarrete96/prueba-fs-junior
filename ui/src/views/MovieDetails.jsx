@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { searchMovieById } from '../services/movieServices';
+import noImage from '../assets/no-image.svg';
 
 export const MovieDetails = () => {
   const { id } = useParams();
@@ -37,6 +38,7 @@ export const MovieDetails = () => {
             src={movie?.image}
             alt={movie?.title}
             className="rounded-lg w-4/5 h-[400px] object-fill"
+            onError={(e) => e.target.src = noImage}
           />
         </div>
         <div className="flex flex-col justify-center w-4/5 text-center md:text-left bg-gray-800 p-6 rounded-lg shadow-md">
