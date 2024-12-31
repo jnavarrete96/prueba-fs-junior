@@ -27,9 +27,9 @@ export const HomeView = () => {
       <div className="flex justify-end mb-4">
         <Link
           to="/create-movie"
-          className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
-        Crear Película
+        Create
         </Link>
       </div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
