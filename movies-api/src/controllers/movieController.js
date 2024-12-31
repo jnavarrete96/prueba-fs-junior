@@ -1,4 +1,4 @@
-import { createMovie } from '../services/movieService.js';
+import { createMovie, listMovies } from '../services/movieService.js';
 
 export const createMovieController = async (req, res) => {
     const movieData = req.body;
@@ -16,5 +16,14 @@ export const createMovieController = async (req, res) => {
       res.status(201).json({message: 'Movie created successfully', id: movieId });
     } catch (error) {
       res.status(500).json({ message: error.message });
+    }
+};
+
+export const listMoviesController = async (req, res) => {
+    try {
+      const movies = await listMovies();
+      res.status(200).json(movies);
+    } catch (error) {
+      res.status(500).json({ message: 'Error al listar las películas', error: error.message });
     }
 };

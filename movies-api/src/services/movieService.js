@@ -9,3 +9,10 @@ export const createMovie = async (movieData) => {
       throw new Error('No se pudo crear la película');
     }
 };
+
+export const listMovies = async () => {
+    const movies = await Movie.findAll({
+      attributes: ['title', 'year', 'genre', 'image'],
+    });
+    return movies;
+};
