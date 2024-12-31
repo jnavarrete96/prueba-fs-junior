@@ -12,9 +12,7 @@ export const createMovie = async (movieData) => {
 
 export const listMovies = async () => {
   const movies = await Movie.findAll({
-    attributes: {
-      exclude: ['id'],
-    },
+    attributes: ['id','title', 'year', 'genre', 'image'],
   });
   return movies;
 };
