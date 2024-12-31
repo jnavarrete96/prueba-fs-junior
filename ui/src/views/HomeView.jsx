@@ -29,7 +29,7 @@ export const HomeView = () => {
                     Create
                 </Link>
             </div>
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center mb-12">
                 {movies.length > 0 ? (
                     movies.map((movie) => <Card key={movie.id} movie={movie} />)
                 ) : (
