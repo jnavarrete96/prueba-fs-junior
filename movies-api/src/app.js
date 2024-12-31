@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/database.js';
 import Movie from './models/movie.js';
+import movieRoutes from './routes/movieRoutes.js';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ connectDB()
   })
   .then(() => {
     console.log('Tabla Movie sincronizada');
+    app.use('/api', movieRoutes);
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en http://localhost:${PORT}`);
     });
