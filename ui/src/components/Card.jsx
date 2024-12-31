@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export const Card = ({ movie }) => {
@@ -8,9 +9,15 @@ export const Card = ({ movie }) => {
         src={movie.image} 
         alt={movie.title} 
       />
-      <div className="p-5">
+      <div className="p-4">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{movie.title}</h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{movie.genre}</p>
+        <Link
+          to={`/movie-details/${movie.id}`}
+          className="bg-blue-600 text-white py-2 px-4 rounded mt-4 hover:bg-blue-700"
+        >
+          View Details
+        </Link>
       </div>
     </article>
   );
@@ -18,6 +25,7 @@ export const Card = ({ movie }) => {
 
 Card.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
