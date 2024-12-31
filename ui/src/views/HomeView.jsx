@@ -1,21 +1,45 @@
-import { Card } from '../components/Card'
-const movie = {
-  title: 'Deadpool & Wolverine',
-  year: '2024',
-  image: 'https://i.pinimg.com/736x/6f/4a/b8/6f4ab823d4a61e08724d647c14daa888.jpg',
-  genre: 'Acción',
-  synopsis:
-    'Deadpool viaja en el tiempo con la intención de reclutar a Wolverine en la batalla contra un enemigo común: Paradox.',
-}
+import { useState, useEffect } from 'react';  // Importar useState y useEffect
+import { Link } from 'react-router';
+import { Card } from '../components/Card';
+import { listMovies } from '../services/movieServices.js';
+
 export const HomeView = () => {
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const data = await listMovies();
+        setMovies(data);
+      } catch (err) {
+        setError('No se pudo cargar la lista de películas. Inténtalo más tarde.');
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
   return (
-    <main className="min-h-screen mx-auto w-full container">
+    <main className="min-h-screen mx-auto w-full max-w-screen-xl px-20">
       <h1 className="text-center text-5xl text-gray-200 font-bold my-4">Best movies of all time</h1>
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {[0, 1, 2, 3, 4].map((item) => (
-          <Card key={item} movie={movie} />
-        ))}
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      <div className="flex justify-end mb-4">
+        <Link
+          to="/create-movie"
+          className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+        >
+        Crear Película
+        </Link>
+      </div>
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
+        {movies.length > 0 ? (
+          movies.map((movie) => <Card key={movie.id} movie={movie} />)
+        ) : (
+          <p className="text-center text-gray-300">No hay películas disponibles.</p>
+        )}
       </section>
     </main>
-  )
-}
+  );
+};
+
